@@ -1,0 +1,38 @@
+<h1>This is your Summoner Home</h1>
+
+<%if @error %>
+	<p> Received error: <%= @error %> </p>
+<% end %>
+
+
+<% if @summoner_id == nil || @summoner_info == nil %>
+	
+	<p> Not a valid summoner ID. </p>
+
+<% else %>
+		
+	<p> You supplied <%= @summoner_id %> </p>
+		
+	<p> Welcome <%= @summoner_info[@summoner_id]["name"] %> </p>
+
+	<table border="3">
+		<tr>
+			<th> Game Type</th>
+			<th> Champion </th>
+			<th> Win/Loss </th>
+		</tr>
+		<% @game_info.each do |game| %>
+			<tr class=<%= cycle("odd","even") %>>
+				<td> <%= game["gameType"] %> </td>
+				<td> <%= game["championId"] %> </td>
+				<td> <%= game["stats"]["win"] ? "Win" : "Loss" %> </td>
+			</tr>
+		<% end %>
+
+	</table>
+
+
+
+<% end %>
+
+
